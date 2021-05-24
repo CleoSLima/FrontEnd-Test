@@ -1,0 +1,63 @@
+<div class="card">
+
+  <div class="card-header">
+    <div class="float-left">
+      <h4>Rabbot: Teste prático para Frontend Developer</h4>
+    </div>
+  </div>
+  <div class="row card-body">
+    <div class="card-body col-md-6">
+        <div class="row mb-3">
+          <div class="input-group col-xl-10 col-md-6 col-sm-6 col-8">
+            <input type="text" #idEmpresa class="form-control" placeholder="ID Empresa" name="idEmpresa" required>
+          </div>
+          <div class="">
+            <button class="btn btn-success" (click)="OnSubmit(idEmpresa.value)">Pesquisar</button>
+          </div>
+        </div>
+      
+      <div class="row mb-3" *ngIf="idEmpresa.value==1">
+        <div class="col-xl-10 col-md-10 col-8">
+          <select class="btn btn-info dropdown-toggle col-12 mb-3" [ngModel]="selectedValue" (ngModelChange)="onChange($event)">
+            <option [value]="i" *ngFor="let fluxo of fluxos; let i = index">Fluxo {{i+1}}</option>
+          </select>
+          
+          
+          <div *ngIf="selectedValue!=null">
+          <div class="accordion" *ngFor="let item of fluxos[selectedValue].Itens">
+            <div class="card mb-3">
+              <div class="card-header" id="headingOne">
+                <h5 class="mb-0 text-left">
+                    Coluna {{item.Ordem}}
+                </h5>
+              </div>
+              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body mb-0 pb-0">
+                  <p>Cor: <span style="background-color: {{item.Cor}} ;"> &nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+                </div>
+                <div class="card-body mb-0 pt-0 pb-0">
+                  <p>ID: {{item.Id}}</p>
+                </div>
+                <div class="card-body float-right">
+                  <button class="btn btn-outline-secondary btn-sm" (click)="pushSelecionado(item.Ordem)">Selecionar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body col-md-6" *ngIf="selectedValue!=null">
+      <h4>Itens Selecionados</h4>
+      <h5 *ngFor="let selectedItem of selectedItens;" class="cart-item">Coluna {{selectedItem}}</h5>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <div class="float-left">
+      <h5>Rabbot | Footer</h5>
+    </div>
+  </div>
+</div>
